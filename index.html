@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class='page1'>
+    <p>Любимые книги</p>
+    <div class='favBook'>
+         <div class='favBookArea'></div>
+         <div class='dropArea'>DROP DOWN AREA</div>
+    </div>
+    <p>Список книг</p>
+    <div class='listBook'>
+
+    </div>
+    <p>Добавить книгу</p>
+    <div class='addBook'>
+      <input type="radio" name="bookType" class='radioLoad' checked> Загрузить книгу <br>
+      <input type="radio" name="bookType" class='radioWrite'> Написать самому <br>
+            
+      <div class='addBook_write hidden'>
+          <input type="text" placeholder='Заголовок' class='inputBookName'> <br>
+          <input type="text" placeholder='Описание' class='inputBookText'> <br> 
+          <button onclick='addBook(this)'>Добавить книгу</button> 
+        </div>
+          
+      <div class="addBook_load">
+          <input type="file" accept='.txt' class='inputBookFile'> <br>
+          <button class='myButton'>Загрузить книгу</button>
+      </div>     
+      
+    </div>
+  </div>
+  
+  <div class='page2'>
+    <p>Тут будет текст книги</p>
+  </div>
+
+  <script src="app.js"></script>    
+</body>
+</html>

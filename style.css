@@ -1,0 +1,144 @@
+body {
+  background: rgb(255, 233, 219);
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* margin: auto; */
+  /* justify-content: center; */
+/*     flex-direction: column; */
+}
+
+p {
+margin: 10px 10px;
+}
+
+input {
+margin: 5px;
+border: none;
+background: rgb(255, 202, 202);
+border-radius: 4px;
+}
+
+button {
+border: none;
+background: grey;
+border-radius: 4px;
+}
+
+.page1 {
+  background: rgb(216, 208, 208);
+  width: 700px;
+  margin-right: 5px;
+  margin-left: 200px;
+  border-radius: 1%;
+/*   margin-bottom: 10px; */
+}
+
+.page2 {
+  background: rgb(216, 208, 208);
+  width: 700px;
+  min-height: 250px;
+  border-radius: 1%;
+  word-break: break-all;
+}
+
+.favBook {
+  background: rgb(216, 255, 212);
+  min-height: 50px;
+  margin: 5px;
+  border-radius: 4px;
+/*     border: solid rgb(216, 255, 212) 2px; */
+/*     display: flex; */
+/*     align-items: flex-end; */
+/*     max-width: 500px; */
+/*     justify-content: space-around; */
+}
+
+.favBookArea {
+/*    background: rgb(216, 255, 212); */
+/*     min-height: 50px; */
+  margin: 5px; 
+/*     border-radius: 4px; */ 
+/*     display: flex; */
+  border: solid rgb(216, 255, 212) 2px;
+/*     justify-content: space-around; */
+}
+
+.dropArea {
+background: grey;
+width: 676px;
+height: 30px;
+margin: 5px;
+border-radius: 6px;
+display: flex;
+justify-content: center; 
+align-items: center;
+border: solid rgb(216, 255, 212) 2px;
+}
+
+.listBook {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  background: rgb(254, 252, 202);
+  margin: 5px;
+  min-height: 100px;
+  border-radius: 4px;
+}
+
+.addBook {
+  background: rgb(255, 202, 202);
+  margin: 5px;
+  border-radius: 4px;
+}
+
+.rowListBook {
+  display: flex;
+  width: 676px;
+  border-radius: 4px;
+}
+
+.done {
+ background-color: #d1ceff; 
+/*  transition: background-color 1s; */
+  
+/*  opacity: 0; */
+ }
+
+.listBookBtn {
+margin: 5px;
+display: flex;
+width: 250px;
+justify-content: space-between;
+}
+
+.listBookName {
+margin: 5px;
+display: flex;
+justify-content: flex-start;
+width: 450px;
+}
+
+
+
+/* .inputChangeBookName {
+border: none;
+background: rgb(255, 202, 202);
+margin: 5px;
+border-radius: 4px;
+}
+
+.inputChangeBookText {
+border: none;
+background: rgb(255, 202, 202);
+margin: 5px;
+border-radius: 4px;
+} */
+
+.item:active {
+cursor: grabbing;
+}
+
+.hidden {
+  display: none;
+}
