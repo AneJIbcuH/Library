@@ -9,7 +9,7 @@ const myButton = document.querySelector('.myButton') // get button element
 
 let books = []
 
-function addBook(element) {
+function addBook() {
   const inputBookName = document.querySelector('.inputBookName')
   const inputBookText = document.querySelector('.inputBookText')
   
@@ -20,66 +20,37 @@ function addBook(element) {
   }
   
   let myBook = document.createElement('div')
-  myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)'>Прочитано</button><button onclick='readBook(this)'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
+  myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}' onmouseover='dragBook(this)'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)'>Прочитано</button><button onclick='readBook(this)'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
   listBook.prepend(myBook)
 
   books.push(book)
 
   inputBookName.value = ''
   inputBookText.value = ''
-  
-  //////////////////Drag n Drop/////////////////////////////////////
-    let rowListBooks = document.querySelectorAll('.rowListBook')
-    for (let item of rowListBooks) {
-        item.addEventListener('dragstart', dragstart)
-        item.addEventListener('dragend', dragend)
-    }
-  
-    // myBook.addEventListener('dragstart', dragstart)
-    // myBook.addEventListener('dragend', dragend)
+}
 
+dropArea.ondragover = allowDrop
 
-    dropArea.addEventListener('dragover', dragover)
-    dropArea.addEventListener('dragenter', dragenter)
-    dropArea.addEventListener('dragleave', dragleave)
-    dropArea.addEventListener('drop', dragdrop)
+function allowDrop(event) {
+  event.preventDefault()
+}
 
-    function dragstart(event) {
-    // event.target.classList.add('hold')
-    // setTimeout(() => event.target.classList.add
-    // ('hide'), 0)    
-    }
+function dragBook(element) {
+  element.ondragstart = drag
+  let id = element.id
 
-    function dragend(event) {
-    // event.target.classList.remove('hold', 'hide')
-    // event.target.className = 'item'
-    }
+  function drag(event) {
+    event.dataTransfer.setData('id', id)
+  }
+}
 
-    function dragover(event) {
-    event.preventDefault()
-    }
+dropArea.ondrop = drop
 
-    function dragenter(event) {
-    // event.target.classList.add('hovered')
-    }
-
-    function dragleave(event) {
-    // event.target.classList.remove('hovered')
-    }
-
-    function dragdrop(event) {
-    // event.target.classList.remove('hovered')
-    // event.target.append(myBook)
-    favBookArea.prepend(myBook)
-    myBook.removeEventListener('dragstart', dragstart)
-    myBook.removeEventListener('dragend', dragend)
-    dropArea.removeEventListener('dragover', dragover)
-    dropArea.removeEventListener('dragenter', dragenter)
-    dropArea.removeEventListener('dragleave', dragleave)
-    dropArea.removeEventListener('drop', dragdrop)
-    }
-
-/////////////////////////////////////
+function drop(event) {
+  let ItemId = event.dataTransfer.getData('id')
+  console.log(ItemId)
+  favBookArea.append(document.getElementById(ItemId))
+  document.getElementById(ItemId).draggable = false
 }
 
 function removeBook(element) {
@@ -88,16 +59,8 @@ function removeBook(element) {
 }
 
 function readBook(element) {
-    // if (page2.children) {
-    //     page2.innerHTML = ''
-    // }
-    let book = books.find(el => el.id == element.parentNode.parentNode.id)
-    // let readMyBook = document.createElement('div')
-    // readMyBook.innerHTML = `<div><p>${book.name}</p><div>${book.text}</div></div>`
-    // page2.prepend(readMyBook)
-  
-   page2.innerHTML = `<div><p>${book.name}</p><div>${book.text}</div></div>`
-    // page2.prepend(readMyBook)
+  let book = books.find(el => el.id == element.parentNode.parentNode.id)
+  page2.innerHTML = `<div><p>${book.name}</p><div>${book.text}</div></div>`
 }
 
 function readDone(element) {
@@ -145,35 +108,15 @@ async function sendPostRequest(login, file) {
 
   const requestOptions = {
     method: "POST",
-    // mode: "no-cors",
     headers: {
       Authorization: `Basic ${authHeader}`,
     },
     body: formData,
   }
 
-
-
-  
-    // const response = await fetch(url, requestOptions)
-
-  
-    // let result = await response.json(); // читать тело ответа в формате JSON
-    // console.log(result.title, '+', result.text)  
-      // let json = respone.json()
-      // let obj = JSON.parse(json)
-      // console.log(typeof response.json())   
-      // console.log(Object.values(response.json()))  
-      // console.log("Request complete, response: ", response.json())      
-
-
-
-
   try {
     const response = await fetch(url, requestOptions)
     if (response.ok) {
-      // let json = respone.json()
-      // let obj = JSON.parse(json)
        
       let result = await response.json()
 
@@ -190,13 +133,7 @@ async function sendPostRequest(login, file) {
       books.push(book)
       
       fileInput.value = ''
- 
-
-      // console.log(result)
-      // console.log(result.title.slice(0, -4), '+', result.text)
-      // console.log(typeof response.json())   
-      // console.log(Object.values(response.json()))  
-      // console.log("Request complete, response: ", response.json())      
+      
     } else {
       console.error("Get some error", response.status, response.statusText)
     }
@@ -207,7 +144,6 @@ async function sendPostRequest(login, file) {
 
 const login = "Dev"
 
-
 myButton.addEventListener("click", () => {
 const file = fileInput.files[0] // get file
 sendPostRequest(login, file)
@@ -217,32 +153,19 @@ const radioLoad = document.querySelector('.radioLoad')
 const radioWrite = document.querySelector('.radioWrite')
 const radioChecked = document.querySelector('.radioChecked')
 
-// function select() {
-//   console.log('tosi bosi')
-//     radioChecked.innerHTML = `<button class='myButton'>Загрузить книгу</button>`
- 
-// }
-
-
 const addBookWrite = document.querySelector('.addBook_write')
 const addBookLoad = document.querySelector('.addBook_load')
-
 
 radioLoad.addEventListener('click', () => {
   console.log('загрузить книгу из файла')
   addBookWrite.classList.add('hidden')
   addBookLoad.classList.remove('hidden')
-    // radioChecked.innerHTML = `<input type="file" accept='.txt' class='inputBookFile'> <br>        
-    //     <button class='myButton'>Загрузить книгу</button>`
 })
 
 radioWrite.addEventListener('click', () => {
   console.log('написать книгу самому')
   addBookWrite.classList.remove('hidden')
   addBookLoad.classList.add('hidden')
-  // radioChecked.innerHTML = `<input type="text" placeholder='Заголовок' class='inputBookName'> <br>
-  //       <input type="text" placeholder='Описание' class='inputBookText'> <br>
-  //       <button onclick='addBook(this)'>Добавить книгу</button>`
 })
 
 
