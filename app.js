@@ -1,7 +1,6 @@
 const listBook = document.querySelector('.listBook')
 const favBookArea = document.querySelector('.favBookArea')
 
-const page1 = document.querySelector('.page1')
 const page2 = document.querySelector('.page2')
 const dropArea = document.querySelector('.dropArea')
 
@@ -176,16 +175,21 @@ radioWrite.addEventListener('click', () => {
   console.log('написать книгу самому')
   addBookWrite.classList.remove('hidden')
   addBookLoad.classList.add('hidden')
+  document.querySelector('.inputBookName').focus()
 })
 
 function saveToLS() {
-  localStorage.setItem('pageOne', page1.innerHTML)
-  localStorage.setItem('array', books)
+  localStorage.setItem('fav', favBookArea.innerHTML)
+  localStorage.setItem('list', listBook.innerHTML)
+  localStorage.setItem('array', JSON.stringify(books))
 }
 
 function loadLS() {
-  page1.innerHTML = localStorage.getItem('pageOne')
-  books = localStorage.getItem('array')
+  favBookArea.innerHTML = localStorage.getItem('fav')
+  listBook.innerHTML = localStorage.getItem('list')
+  books = JSON.parse(localStorage.getItem('array'))
 }
 
-// loadLS()
+if (books.length == 0) {
+  loadLS()
+}
