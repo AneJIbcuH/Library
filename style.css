@@ -13,7 +13,7 @@ margin: 10px 10px;
 
 input {
 margin: 5px;
-border: none;
+border: solid 1px rgb(255, 233, 219);
 background: rgb(255, 202, 202);
 border-radius: 4px;
 }
@@ -43,9 +43,12 @@ border-radius: 4px;
 
 .favBook {
   background: rgb(216, 255, 212);
-  min-height: 50px;
+  min-height: 40px;
   margin: 5px;
   border-radius: 4px;
+   padding-bottom: 1px;
+/*   padding-bottom: 1px;
+  padding-top: 5px; */
 /*     border: solid rgb(216, 255, 212) 2px; */
 /*     display: flex; */
 /*     align-items: flex-end; */
@@ -56,32 +59,34 @@ border-radius: 4px;
 .favBookArea {
 /*    background: rgb(216, 255, 212); */
 /*     min-height: 50px; */
-  margin: 5px; 
+/*   margin: 5px;  */
 /*     border-radius: 4px; */ 
 /*     display: flex; */
-  border: solid rgb(216, 255, 212) 2px;
+/*   border: solid rgb(216, 255, 212) 2px; */
 /*     justify-content: space-around; */
-}
+  padding-top: 1px;
+ }
 
 .dropArea {
 background: grey;
-width: 676px;
+width: 680px;
 height: 30px;
+border-radius: 4px;
 margin: 5px;
-border-radius: 6px;
-display: flex;
-justify-content: center; 
-align-items: center;
-border: solid rgb(216, 255, 212) 2px;
+text-align: center;
+/*   display: table-cell;
+ vertical-align: middle; */
+padding-top: 10px;
 }
 
 .listBook {
-  display: flex;
+/*   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-direction: column;
+  flex-direction: column; */
   background: rgb(254, 252, 202);
   margin: 5px;
+  padding: 1px 0;
   min-height: 100px;
   border-radius: 4px;
 }
@@ -94,21 +99,21 @@ border: solid rgb(216, 255, 212) 2px;
 
 .rowListBook {
   display: flex;
-  width: 676px;
+  width: 680px;
   border-radius: 4px;
+  margin: 5px;
+/*   margin-top: 5px; */
 }
 
 .done {
  background-color: #d1ceff; 
-/*  transition: background-color 1s; */
-  
-/*  opacity: 0; */
+ background: rgb(216, 208, 208);
  }
 
 .listBookBtn {
 margin: 5px;
 display: flex;
-width: 250px;
+width: 290px;
 justify-content: space-between;
 }
 
@@ -119,26 +124,44 @@ justify-content: flex-start;
 width: 450px;
 }
 
+.listBookBtn_read {
+/*   border: solid red  2px; */
+  width: 125px;
+}
 
+.inputBookName {
+  width: 675px;
+}
 
-/* .inputChangeBookName {
-border: none;
+.inputBookText {
+  width: 675px;
+  height: 300px;
+}
+
+.inputChangeBookName {
+width: 680px;
 background: rgb(255, 202, 202);
 margin: 5px;
 border-radius: 4px;
 }
 
 .inputChangeBookText {
-border: none;
+width: 680px;
+height: 300px;
+word-break: break-all;
 background: rgb(255, 202, 202);
 margin: 5px;
 border-radius: 4px;
-} */
-
-.item:active {
-cursor: grabbing;
 }
 
 .hidden {
   display: none;
+}
+
+.inputBookFile {
+ border: none;
+}
+
+.btn {
+  margin: 5px;
 }
