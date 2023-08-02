@@ -9,18 +9,37 @@ const myButton = document.querySelector('.myButton') // get button element
 
 let books = []
 
+document.querySelector('.page1').addEventListener('click', event => {
+    if (event.target.className == 'change') {
+      changeBook(event)
+    }
+    if (event.target.className == 'remove') {
+      removeBook(event)
+    }
+    if (event.target.className == 'listBookBtn_read') {
+      readDone(event)
+    }
+    if (event.target.className == 'read') {
+      readBook(event)
+    }
+  })
+
 function addBook() {
   const inputBookName = document.querySelector('.inputBookName')
   const inputBookText = document.querySelector('.inputBookText')
   
   let book = {
   id: Date.now(),
-  name: inputBookName.value,
-  text: inputBookText.value
+  name: inputBookName?.value,
+  text: inputBookText?.value
   }
   
   let myBook = document.createElement('div')
-  myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}' onmouseover='dragBook(this)'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)' class='listBookBtn_read'>НЕ ПРОЧИТАНО</button><button onclick='readBook(this)'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
+  
+  // myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}' onmouseover='dragBook(this)'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)' class='listBookBtn_read'>НЕ ПРОЧИТАНО</button><button onclick='readBook(this)'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
+  
+  myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}' onmouseover='dragBook(this)'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button class='change'>РЕД.</button><button class='listBookBtn_read'>НЕ ПРОЧИТАНО</button><button class='read'>ЧИТАТЬ</button><button class='remove'>Х</button></div></div>`
+  
   listBook.prepend(myBook)
 
   books.push(book)
@@ -55,18 +74,21 @@ function drop(event) {
   saveToLS()
 }
 
-function removeBook(element) {
+function removeBook(event) {
+    let element = event.target
     element.parentNode.parentNode.remove()
     books = books.filter(el => el.id != element.parentNode.parentNode.id)
     saveToLS()
 }
 
-function readBook(element) {
+function readBook(event) {
+  let element = event.target
   let book = books.find(el => el.id == element.parentNode.parentNode.id)
   page2.innerHTML = `<div><p>${book.name}</p><p>${book.text}</p></div>`
 }
 
-function readDone(element) {
+function readDone(event) {
+  let element = event.target
   if (element.parentNode.parentNode.classList.contains('done')) {
     if (element.closest('.listBook')) {
       listBook.prepend(element.parentNode.parentNode)} 
@@ -85,7 +107,8 @@ function readDone(element) {
   saveToLS()
 }
 
-function changeBook(element) {
+function changeBook(event) {
+  let element = event.target
   let book = books.find(el => el.id == element.parentNode.parentNode.id)
   page2.innerHTML = `<input type="text" value='${book.name}' class='inputChangeBookName'> <br>
   <input type="text" value='${book.text}' class='inputChangeBookText'> <br> <button class='saveChange btn'>Сохранить измения в книге</button>`
@@ -134,7 +157,12 @@ async function sendPostRequest(login, file) {
         }
         
       let myBook = document.createElement('div')
-      myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)'>НЕ ПРОЧИТАНО</button><button onclick='readBook(this)' class='listBookBtn_read'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
+      
+      // myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button onclick='changeBook(this)'>РЕД.</button><button onclick='readDone(this)'>НЕ ПРОЧИТАНО</button><button onclick='readBook(this)' class='listBookBtn_read'>ЧИТАТЬ</button><button onclick='removeBook(this)'>Х</button></div></div>`
+      
+      myBook.innerHTML = `<div class='rowListBook' draggable='true' id='${book.id}' onmouseover='dragBook(this)'><div class='listBookName'>${book.name}</div><div class='listBookBtn'><button class='change'>РЕД.</button><button class='listBookBtn_read'>НЕ ПРОЧИТАНО</button><button class='read'>ЧИТАТЬ</button><button class='remove'>Х</button></div></div>`
+      
+      
       listBook.prepend(myBook)
       
       books.push(book)
@@ -147,7 +175,7 @@ async function sendPostRequest(login, file) {
       console.error("Get some error", response.status, response.statusText)
     }
   } catch (error) {
-    console.error("Nihera ne rabotaet padla: ", error)
+    console.error("Ne rabotaet: ", error)
   }
 }
 
