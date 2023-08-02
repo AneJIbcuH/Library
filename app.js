@@ -218,6 +218,10 @@ function loadLS() {
   books = JSON.parse(localStorage.getItem('array'))
 }
 
-if (books.length == 0) {
+if (JSON.parse(localStorage.getItem('array')).length > 0) {
   loadLS()
 }
+
+// if (books.length == 0) {
+//   loadLS()
+// }
